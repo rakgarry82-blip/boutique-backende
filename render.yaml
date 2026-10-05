@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: boutique-api
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - { key: NODE_VERSION, value: "20" }
+      - { key: NODE_ENV, value: production }
+      - { key: TRUST_PROXY, value: "2" }
+      - { key: JWT_SECRET, generateValue: true }
+      - { key: PAYPAL_ENV, value: sandbox }
+      - { key: PAYPAL_CURRENCY, value: EUR }
+      - { key: RATE_AR_PER_UNIT, value: "5000" }
+      - { key: DATABASE_URL, sync: false }
+      - { key: ADMIN_SALT, sync: false }
+      - { key: ADMIN_HASH, sync: false }
+      - { key: FRONTEND_ORIGIN, sync: false }
+      - { key: PAYPAL_CLIENT_ID, sync: false }
+      - { key: PAYPAL_SECRET, sync: false }
+      - { key: PAYPAL_WEBHOOK_ID, sync: false }
